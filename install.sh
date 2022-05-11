@@ -30,6 +30,7 @@ fi
 # Install / Update VestaCP Wordpress Application Installer
 
 	cd /usr/local/hestia/bin
+	curl -O https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/hestia/bin/v-install-wordpress
 	chmod 755 v-install-wordpress
 	chmod +x v-install-wordpress
 
