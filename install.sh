@@ -1,13 +1,13 @@
 #!/bin/bash
 # VestaCP Wordpress Application Installer
 
-echo "This will install VeataCP Wordpress Installer in your VestaCP"
+echo "This will install HestiaCP Wordpress Installer in your HestiaCP"
 
 # Check if WP CLI is Installed // Install WP CLI
 wpcli=/usr/local/hestia/bin/wp
 if test -f "$wpcli"; then
 	echo "WP-CLI already installed."
-	echo "This Script Will Update VeataCP Wordpress Installer"
+	echo "This Script Will Update HestiaCP Wordpress Installer"
 	cd /usr/local/hestia/bin
 	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 	mv wp-cli.phar wp
@@ -27,7 +27,7 @@ else
 
 fi
 
-# Install / Update VestaCP Wordpress Application Installer
+# Install / Update HestiaCP Wordpress Application Installer
 
 	cd /usr/local/hestia/bin
 	curl -O https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/hestia/bin/v-install-wordpress
@@ -35,6 +35,6 @@ fi
 	chmod +x v-install-wordpress
 
 	# Success
-	echo "VestaCP Wordpress Application Installer by maskoid.com is SUCCESSFULLY INSTALLED/UPDATED"
+	echo "HestiaCP Wordpress Application Installer by maskoid.com is SUCCESSFULLY INSTALLED/UPDATED ported to Hestia By Spacestangs"
 
 
