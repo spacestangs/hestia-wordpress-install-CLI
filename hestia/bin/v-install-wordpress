@@ -1,0 +1,166 @@
+#!/bin/bash
+# info: install wordpress
+# options: domain install_path admin_email admin_user blog_title fname lname dbname dbuser dbpassword
+#
+# The function will install latest wordpress blog.
+# Developed by maskoid.com vist us @ https://github.com/maskoid
+
+#----------------------------------------------------------#
+#                    Variable&Function                     #
+#----------------------------------------------------------#
+
+# Argument definition
+user=$1
+domain=$2
+admin_email=$3
+admin_user=$4
+admin_passwd=$5
+path=$6
+admin_email=$6
+blog_title=$7
+fname=$8
+lname=$9
+https=${10}
+www=${11}
+blog_url=${12}
+
+WORKINGDIR="/home/$user/web/$domain/public_html$path"
+wp="/usr/local/hestia/bin/wp"
+
+## /usr/local/vesta/bin/v-install-wordpress vestauser example.com /testing admin password admin@website.com "My Title" Azad Shaikh no
+#----------------------------------------------------------#
+#                    Verifications                         #
+#----------------------------------------------------------#
+
+## Check if users exists ##
+if [ ! -d "/home/$user" ]; then
+    echo -e "${RED}User doesn't exist${NC}";
+    exit 1;
+fi
+## Check if domain exists ##
+if [ ! -d "/home/$user/web/$domain/public_html" ]; then
+    echo -e "${RED}Domain doesn't exist${NC}";
+    exit 1;
+fi
+
+## Check if install path exist ##
+if [ ! -d "/home/$user/web/$domain/public_html$path" ] 
+then
+    sudo -H -u $user mkdir -p $WORKINGDIR
+else
+    # Check if Install Folder is Empty
+    if [ "$(ls -A $WORKINGDIR)" ]; then
+        #install dir is not empty
+        FILECOUNT=$(find $WORKINGDIR -type f | wc -l)
+        DIRCOUNT=$(find $WORKINGDIR -type d | wc -l)
+        if [ $FILECOUNT == "2" ] && [ $DIRCOUNT == "1" ]; then
+            rm -rf $WORKINGDIR/*
+        else
+            echo -e "${RED} $WORKINGDIR is not empty ${NC}";
+            exit 1;
+        fi
+    fi
+fi
+
+# Check if WP-CLI is Installed
+
+if [ ! -f $wp ]; then
+    echo -e "${RED}WP-CLI not found. First Install WP-CLI${NC}";
+    exit 1;
+fi
+
+#----------------------------------------------------------#
+#                       Action                             #
+#----------------------------------------------------------#
+
+cd $WORKINGDIR
+
+echo $WORKINGDIR
+
+echo -e "###################################################################"
+echo -e "We are installing Wordpress ...."
+echo -e "###################################################################"
+echo $WORKINGDIR
+### Blog URL ###
+
+if [ $www = "www" ]; then
+    midurl="://"
+    dot="."
+    blog_url=$https$midurl$www$dot$domain$path
+    else
+    midurl="://"
+    blog_url=$https$midurl$domain$path
+fi
+
+### Create Database ###
+#Generating Database Name and User (both will be same)
+
+while true
+do
+dbname=$(head /dev/urandom | tr -dc A-Za-z | head -c6)
+dbuser=$user\_$dbname;
+if [ ! -d "/var/lib/mysql/$dbuser" ]; then
+break;
+fi
+done
+
+#Generating Database Password
+dbpassword=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c10)
+#Creating Database and DB User
+dbinstallresult=$(/usr/bin/sudo /usr/local/hestia/bin/v-add-database $user $dbname $dbname $dbpassword)
+
+if [ -z "$dbinstallresult" ]
+then
+      echo "Database Created Successfully"
+else
+      echo "$dbinstallresult"
+      exit 1;
+fi
+## So that both will have admin_ in dbname dbuser
+dbname=$dbuser
+
+### Install Wordpress ###
+echo $WORKINGDIR
+sudo -H -u $user $wp core download
+sudo -H -u $user $wp config create --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpassword --dbhost='localhost' --dbprefix='wpxyz_'
+sudo -H -u $user $wp core install --url="$blog_url" --title="$blog_title" --admin_user="$admin_user" --admin_password="$admin_passwd" --admin_email="$admin_email"
+sudo -H -u $user $wp user update "$admin_user" --first_name="$fname" --last_name="$lname" --display_name="Admin"
+#sudo -H -u $user $wp plugin delete hello
+#sudo -H -u $user $wp theme delete twentyseventeen twentysixteen
+#sudo -H -u $user $wp rewrite structure '/%category%/%postname%/'
+#sudo -H -u $user $wp option update timezone_string "Asia/Kolkata"
+#sudo -H -u $user $wp option update blogdescription ""
+#sudo -H -u $user $wp plugin install akismet edit-author-slug classic-editor password-protected seo-by-rank-math contact-form-7 wp-revisions-control --activate
+#sudo -H -u $user $wp option update wordpress_api_key "b306c1b3ccd3"
+#sudo -H -u $user $wp post delete 1
+#sudo -H -u $user $wp post delete $(wp post list --post_type='page' --format=ids)
+
+echo -e "###################################################################"
+echo -e "Your New WordPress Site is Ready!!"
+echo -e "###################################################################"
+echo -e " "
+echo -e "Your new WordPress site has been successfully set up at:"
+echo -e " "
+echo -e $blog_url
+echo -e " "
+echo -e "You can log in to the administrator account with the following information:"
+echo -e " "
+echo -e "Username: "$admin_user
+echo -e "Password: "$admin_passwd
+echo -e "Log in here: "$blog_url"wp-login.php"
+echo -e " "
+echo -e "We hope you enjoy your new site. Thanks!"
+echo -e " "
+echo -e "Powered by Maskoid ==> https://github.com/maskoid "
+### Setup .htaccess and robots.txt file ###
+
+sudo -H -u $user curl -O https://raw.githubusercontent.com/maskoid/vestacp-wordpress-installer/master/resources/robots.txt
+sudo -H -u $user curl -O https://raw.githubusercontent.com/maskoid/vestacp-wordpress-installer/master/resources/.htaccess
+sudo rm -f readme.html
+sudo rm -f license.txt
+
+#----------------------------------------------------------#
+#                       Vesta                              #
+#----------------------------------------------------------#
+
+#will use this when installed in nginx
