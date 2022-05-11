@@ -5,7 +5,7 @@ Automatic Wordpress Installer for HestiaCP
 ## Note: This is in development stage.
 
 ```shell
-wget -N https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/install.sh
+wget -N https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/install.sh
 bash install.sh
 ```
 arug
