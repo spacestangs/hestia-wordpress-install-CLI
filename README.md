@@ -1,5 +1,5 @@
-# vestacp-wordpress-installer
-Automatic Wordpress Installer for VestaCP
+# Hestia-wordpress-installer
+Automatic Wordpress Installer for HestiaCP
 
 
 ## Note: This is in development stage.
@@ -9,4 +9,4 @@ wget -N https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-C
 bash install.sh
 ```
 
-## Tested for CentOS 
+## Tested on ubuntu
