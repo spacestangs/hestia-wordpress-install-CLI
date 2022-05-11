@@ -16,7 +16,6 @@ admin_email=$3
 admin_user=$4
 admin_passwd=$5
 path=$6
-admin_email=$6
 blog_title=$7
 fname=$8
 lname=$9
