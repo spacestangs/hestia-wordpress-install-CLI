@@ -1,5 +1,9 @@
 # Hestia-wordpress-installer
 Automatic Wordpress Installer for HestiaCP
+how to use
+
+example : v-install-wordpress username domain spacestangs@gmail.com admin password / "My Title" name lastname no
+
 
 
 ## Note: This is in development stage.
