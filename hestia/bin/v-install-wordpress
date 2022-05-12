@@ -43,7 +43,7 @@ if [ ! -d "/home/$user/web/$domain/public_html" ]; then
 fi
 
 ## Check if install path exist ##
-if [ ! -d "/home/$user/web/$domain/public_html$path" ] 
+if [ ! -d "/home/$user/web/$domain/public_html/$path" ] 
 then
     sudo -H -u $user mkdir -p $WORKINGDIR
 else
