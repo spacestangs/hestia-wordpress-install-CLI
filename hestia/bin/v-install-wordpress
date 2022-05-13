@@ -12,10 +12,10 @@
 # Argument definition
 user=$1
 domain=$2
-admin_email=$3
+path=$3
 admin_user=$4
 admin_passwd=$5
-path=$6
+admin_email=$6
 blog_title=$7
 fname=$8
 lname=$9
@@ -26,7 +26,7 @@ blog_url=${12}
 WORKINGDIR="/home/$user/web/$domain/public_html$path"
 wp="/usr/local/hestia/bin/wp"
 
-## /usr/local/vesta/bin/v-install-wordpress vestauser example.com /testing admin password admin@website.com "My Title" Azad Shaikh no
+## /usr/local/hestia/bin/v-install-wordpress hestiauser example.com /testing admin password admin@website.com "My Title" Azad Shaikh no
 #----------------------------------------------------------#
 #                    Verifications                         #
 #----------------------------------------------------------#
@@ -43,7 +43,7 @@ if [ ! -d "/home/$user/web/$domain/public_html" ]; then
 fi
 
 ## Check if install path exist ##
-if [ ! -d "/home/$user/web/$domain/public_html/$path" ] 
+if [ ! -d "/home/$user/web/$domain/public_html$path" ] 
 then
     sudo -H -u $user mkdir -p $WORKINGDIR
 else
@@ -151,15 +151,16 @@ echo -e " "
 echo -e "We hope you enjoy your new site. Thanks!"
 echo -e " "
 echo -e "Powered by Maskoid ==> https://github.com/maskoid "
+echo -e "Ported to hestia by https://github.com/spacestangs"
 ### Setup .htaccess and robots.txt file ###
 
-sudo -H -u $user curl -O https://raw.githubusercontent.com/maskoid/vestacp-wordpress-installer/master/resources/robots.txt
-sudo -H -u $user curl -O https://raw.githubusercontent.com/maskoid/vestacp-wordpress-installer/master/resources/.htaccess
+sudo -H -u $user curl -O https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/resources/robots.txt
+sudo -H -u $user curl -O https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/resources/.htaccess
 sudo rm -f readme.html
 sudo rm -f license.txt
 
 #----------------------------------------------------------#
-#                       Vesta                              #
+#                       hestia                              #
 #----------------------------------------------------------#
 
 #will use this when installed in nginx
