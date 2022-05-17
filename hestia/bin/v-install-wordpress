@@ -80,7 +80,7 @@ echo -e "###################################################################"
 echo -e "We are installing Wordpress ...."
 echo -e "###################################################################"
 echo $WORKINGDIR
-### Blog URL ###
+### Blog URL ###$https$midurl$
 
 if [ $www = "www" ]; then
     midurl="://"
@@ -88,7 +88,7 @@ if [ $www = "www" ]; then
     blog_url=$https$midurl$www$dot$domain$path
     else
     midurl="://"
-    blog_url=$https$midurl$domain$path
+    blog_url=domain$path
 fi
 
 ### Create Database ###
