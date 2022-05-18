@@ -111,6 +111,8 @@ dbinstallresult=$(/usr/bin/sudo /usr/local/hestia/bin/v-add-database $user $dbna
 if [ -z "$dbinstallresult" ]
 then
       echo "Database Created Successfully"
+      /usr/bin/sudo /usr/local/hestia/bin/v-add-letsencrypt-domain  $user $domain
+      /usr/bin/sudo /usr/local/hestia/bin/v-add-web-domain-ssl-force $user $domain
 else
       echo "$dbinstallresult"
       exit 1;
