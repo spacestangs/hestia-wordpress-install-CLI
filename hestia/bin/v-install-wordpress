@@ -82,7 +82,7 @@ echo -e "###################################################################"
 echo $WORKINGDIR
 ### Blog URL ###$https$midurl$
 
-if [ $www = "www" ]; then
+if [[ $www = "www" ]]; then
     midurl="://"
     dot="."
     blog_url=$https$midurl$www$dot$domain$path
