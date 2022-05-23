@@ -119,11 +119,15 @@ dbname=$dbuser
 #--title="$blog_title" --admin_user="$admin_user" --admin_password="$admin_passwd" --admin_email="$admin_email"
 #sudo -H -u $user $wp user update "$admin_user" --first_name="$fname" --last_name="$lname" --display_name="Admin"
 ### Install Wordpress ###
-
+echo -e "###################################################################"
+echo -e "genataring ssl"
+echo -e "###################################################################"
+/usr/bin/sudo /usr/local/hestia/bin/v-add-letsencrypt-domain  $user $domain
+/usr/bin/sudo /usr/local/hestia/bin/v-add-web-domain-ssl-force $user $domain
 echo $WORKINGDIR
 sudo -H -u $user $wp core download
 sudo -H -u $user $wp config create --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpassword --dbhost='localhost' --dbprefix='wpxyz_'
-sudo -H -u $user $wp core install --url="$blog_url" 
+sudo -H -u $user $wp core install --url="$blog_url" --title=<site-title> --admin_user="$admin_user"  --admin_email="$admin_email"
 #sudo -H -u $user $wp plugin delete hello
 #sudo -H -u $user $wp theme delete twentyseventeen twentysixteen
 #sudo -H -u $user $wp rewrite structure '/%category%/%postname%/'
@@ -133,9 +137,6 @@ sudo -H -u $user $wp core install --url="$blog_url"
 #sudo -H -u $user $wp option update wordpress_api_key "b306c1b3ccd3"
 #sudo -H -u $user $wp post delete 1
 #sudo -H -u $user $wp post delete $(wp post list --post_type='page' --format=ids)
-echo -e "genataring ssl"
-/usr/bin/sudo /usr/local/hestia/bin/v-add-letsencrypt-domain  $user $domain
-/usr/bin/sudo /usr/local/hestia/bin/v-add-web-domain-ssl-force $user $domain
 echo -e "###################################################################"
 echo -e "Your New WordPress Site is Ready!!"
 echo -e "###################################################################"
