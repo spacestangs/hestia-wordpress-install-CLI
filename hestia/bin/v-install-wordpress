@@ -13,12 +13,11 @@
 user=$1
 domain=$2
 path=$3
-admin_user=$4
-admin_passwd=$5
+blog_title=$4
+admin_user=$5
 admin_email=$6
-blog_title=$7
-fname=$8
-lname=$9
+fname=$7
+lname=$8
 https=${10}
 www=${11}
 blog_url=${12}
