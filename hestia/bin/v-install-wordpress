@@ -125,8 +125,23 @@ echo -e "###################################################################"
 /usr/bin/sudo /usr/local/hestia/bin/v-add-letsencrypt-domain  $user $domain
 /usr/bin/sudo /usr/local/hestia/bin/v-add-web-domain-ssl-force $user $domain
 echo $WORKINGDIR
-sudo -H -u $user $wp core download
-sudo -H -u $user $wp config create --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpassword --dbhost='localhost' --dbprefix='wpxyz_'
+
+cd /home/$user
+
+rm -rf /home/$user/wp
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod +x wp-cli.phar
+sudo mv wp-cli.phar wp
+
+cd /home/$user/web/$domain/public_html
+
+sudo -H -u$user php -d disable_functions="" /home/$user/wp core download
+sudo -H -u$user php -d disable_functions="" /home/$user/wp core config --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpassword
+
+
+
+#sudo -H -u $user $wp core download
+#sudo -H -u $user $wp config create --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpassword --dbhost='localhost' --dbprefix='wpxyz_'
 #sudo -H -u $user $wp core install --url="$blog_url" --title=<site-title> --admin_user="$admin_user"  --admin_email="$admin_email"
 #sudo -H -u $user $wp plugin delete hello
 #sudo -H -u $user $wp theme delete twentyseventeen twentysixteen
