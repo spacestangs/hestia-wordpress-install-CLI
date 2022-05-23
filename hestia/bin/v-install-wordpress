@@ -155,6 +155,7 @@ sudo -H -u $user $wp user update "$admin_user" --first_name="$fname" --last_name
 #sudo -H -u $user $wp post delete $(wp post list --post_type='page' --format=ids)
 echo -e "###################################################################"
 echo -e "Your New WordPress Site is Ready!!"
+echo -e "newstyle"
 echo -e "###################################################################"
 echo -e " "
 echo -e "Your new WordPress site has been successfully set up at:"
