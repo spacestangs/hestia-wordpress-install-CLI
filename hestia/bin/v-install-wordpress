@@ -124,10 +124,22 @@ echo -e "genataring ssl"
 echo -e "###################################################################"
 /usr/bin/sudo /usr/local/hestia/bin/v-add-letsencrypt-domain  $user $domain
 /usr/bin/sudo /usr/local/hestia/bin/v-add-web-domain-ssl-force $user $domain
+
+cd /home/$user
+
+rm -rf /home/$user/wp
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod +x wp-cli.phar
+sudo mv wp-cli.phar wp
+
+cd /home/$user/web/$domain/public_html
 echo $WORKINGDIR
-sudo -H -u $user $wp core download
-sudo -H -u $user $wp config create --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpassword --dbhost='localhost' --dbprefix='wpxyz_'
-sudo -H -u $user $wp core install --url="$blog_url" 
+sudo -H -u$user php -d disable_functions="" /home/$user/wp core download
+sudo -H -u$user php -d disable_functions="" /home/$user/wp core config --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpassword --dbhost='localhost' --dbprefix='wpxyz_'
+
+#sudo -H -u$user php -d disable_functions="" /home/$user/wp core install --url="$domain" --title="$domain" --admin_user="admin" --admin_password="$password" --admin_email="$email" --path=$WORKINGDIR
+
+#sudo -H -u $user $wp core install --url="$blog_url" 
 sudo -H -u $user $wp user update "$admin_user" --first_name="$fname" --last_name="$lname" --display_name="Admin"
 #sudo -H -u $user $wp core download
 #sudo -H -u $user $wp config create --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpassword --dbhost='localhost' --dbprefix='wpxyz_'
