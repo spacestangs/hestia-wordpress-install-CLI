@@ -123,7 +123,7 @@ dbname=$dbuser
 echo $WORKINGDIR
 sudo -H -u $user $wp core download
 sudo -H -u $user $wp config create --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpassword --dbhost='localhost' --dbprefix='wpxyz_'
-sudo -H -u $user $wp core install --url="$blog_url" 
+sudo -H -u $user $wp core install --url="$blog_url" --title="$blog_title"  --admin_user="$admin_user" --admin_email="$admin_email"
 #sudo -H -u $user $wp plugin delete hello
 #sudo -H -u $user $wp theme delete twentyseventeen twentysixteen
 #sudo -H -u $user $wp rewrite structure '/%category%/%postname%/'
