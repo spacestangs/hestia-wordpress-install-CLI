@@ -121,7 +121,7 @@ dbname=$dbuser
 ### Install Wordpress ###
 
 
-echo $WORKINGDIR
+#echo $WORKINGDIR
 
 sudo -H -u $user $wp core download
 sudo -H -u $user $wp config create --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpassword --dbhost='localhost' --dbprefix='wpxyz_'
@@ -136,37 +136,32 @@ sudo -H -u $user $wp core install --url="$blog_url"
 #sudo -H -u $user $wp option update wordpress_api_key "b306c1b3ccd3"
 #sudo -H -u $user $wp post delete 1
 #sudo -H -u $user $wp post delete $(wp post list --post_type='page' --format=ids)
-echo -e "###################################################################"
 echo -e "Your New WordPress Site is Ready!!"
-echo -e "newstyle"
-echo -e "###################################################################"
-echo -e " "
-echo -e "Your new WordPress site has been successfully set up at:"
-echo -e " "
-echo -e $blog_url
-echo -e " "
-echo -e "You can log in to the administrator account with the following information:"
-echo -e " "
-echo -e "Username: "$admin_user
-echo -e "Password: "$admin_passwd
-echo -e "Log in here: "$blog_url"/wp-login.php"
-echo -e " "
-echo -e "We hope you enjoy your new site. Thanks!"
-echo -e " "
-echo -e "Powered by Maskoid ==> https://github.com/maskoid "
+#echo -e " "
+#echo -e $blog_url
+#echo -e " "
+#echo -e "You can log in to the administrator account with the following information:"
+#echo -e " "
+#echo -e "Username: "$admin_user
+#echo -e "Password: "$admin_passwd
+#echo -e "Log in here: "$blog_url"/wp-login.php"
+#echo -e " "
+#echo -e "We hope you enjoy your new site. Thanks!"
+#echo -e " "
+#echo -e "Powered by Maskoid ==> https://github.com/maskoid "
 echo -e "Ported to hestia by https://github.com/spacestangs"
 ### Setup .htaccess and robots.txt file ###
 
-sudo -H -u $user curl -O https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/resources/robots.txt
-sudo -H -u $user curl -O https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/resources/.htaccess
+#sudo -H -u $user curl -O https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/resources/robots.txt
+#sudo -H -u $user curl -O https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/resources/.htaccess
 echo -e "###################################################################"
 echo -e "genataring ssl"
 echo -e "###################################################################"
-/usr/bin/sudo /usr/local/hestia/bin/v-change-web-domain-backend-tpl $user $domain default RESTART
-#/usr/bin/sudo /usr/local/hestia/bin/v-add-letsencrypt-domain  $user $domain
-#/usr/bin/sudo /usr/local/hestia/bin/v-add-web-domain-ssl-force $user $domain
+/usr/bin/sudo /usr/local/hestia/bin/v-add-letsencrypt-domain  $user $domain
+/usr/bin/sudo /usr/local/hestia/bin/v-add-web-domain-ssl-force $user $domain
 sudo rm -f readme.html
 sudo rm -f license.txt
+/usr/bin/sudo /usr/local/hestia/bin/v-change-web-domain-backend-tpl $user $domain default RESTART
 
 #----------------------------------------------------------#
 #                       hestia                              #
