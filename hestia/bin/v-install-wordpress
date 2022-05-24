@@ -162,6 +162,7 @@ sudo -H -u $user curl -O https://raw.githubusercontent.com/spacestangs/hestia-wo
 echo -e "###################################################################"
 echo -e "genataring ssl"
 echo -e "###################################################################"
+/usr/bin/sudo /usr/local/hestia/bin/v-change-web-domain-backend-tpl $user $domain default RESTART
 /usr/bin/sudo /usr/local/hestia/bin/v-add-letsencrypt-domain  $user $domain
 /usr/bin/sudo /usr/local/hestia/bin/v-add-web-domain-ssl-force $user $domain
 sudo rm -f readme.html
