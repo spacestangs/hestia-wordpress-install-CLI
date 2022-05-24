@@ -136,7 +136,7 @@ sudo -H -u $user $wp core install --url="$blog_url"
 #sudo -H -u $user $wp option update wordpress_api_key "b306c1b3ccd3"
 #sudo -H -u $user $wp post delete 1
 #sudo -H -u $user $wp post delete $(wp post list --post_type='page' --format=ids)
-echo -e "Your New WordPress Site is Ready!!"
+printf "Your New WordPress Site is Ready!!\n"
 #echo -e " "
 #echo -e $blog_url
 #echo -e " "
@@ -149,7 +149,7 @@ echo -e "Your New WordPress Site is Ready!!"
 #echo -e "We hope you enjoy your new site. Thanks!"
 #echo -e " "
 #echo -e "Powered by Maskoid ==> https://github.com/maskoid "
-echo -e "Ported to hestia by https://github.com/spacestangs"
+printf "Ported to hestia by https://github.com/spacestangs\n"
 ### Setup .htaccess and robots.txt file ###
 
 #sudo -H -u $user curl -O https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/resources/robots.txt
