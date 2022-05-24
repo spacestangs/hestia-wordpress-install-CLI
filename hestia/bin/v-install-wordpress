@@ -125,7 +125,7 @@ sudo -H -u $user $wp core download
 sudo -H -u $user $wp config create --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpassword --dbhost='localhost' --dbprefix='wpxyz_'
 sudo -H -u $user $wp core install --url="$blog_url" 
 printf "\nYour New WordPress Site is Ready!!\n"
-printf "Your New WordPress Site is Ready\Login at "$blog_url"/wp-login.ph\n"
+printf "Your New WordPress Site is Ready\Login at $blog_url/wp-login.ph\n"
 #echo -e " "
 #echo -e $blog_url
 #echo -e " "
