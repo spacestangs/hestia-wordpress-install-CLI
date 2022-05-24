@@ -75,9 +75,7 @@ cd $WORKINGDIR
 
 #echo $WORKINGDIR
 
-echo "###################################################################"
-echo "We are installing Wordpress ...."
-echo "###################################################################"
+echo "###################################################################\nWe are installing Wordpress ....\n##################################################################"
 #echo $WORKINGDIR
 ### Blog URL ###$https$midurl$
 
@@ -144,9 +142,7 @@ printf "Ported to hestia by https://github.com/spacestangs\n"
 
 #sudo -H -u $user curl -O https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/resources/robots.txt
 #sudo -H -u $user curl -O https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/resources/.htaccess
-echo "###################################################################"
-echo "genataring ssl"
-echo "###################################################################"
+echo "###################################################################\nGenerating SSL ....\n##################################################################"
 /usr/bin/sudo /usr/local/hestia/bin/v-add-letsencrypt-domain  $user $domain
 /usr/bin/sudo /usr/local/hestia/bin/v-add-web-domain-ssl-force $user $domain
 sudo rm -f readme.html
