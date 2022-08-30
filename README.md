@@ -14,8 +14,7 @@ example : v-install-wordpress username domain /
 ## Note: This is in development stage.
 
 installation:
-wget -N https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/install.sh
-bash install.sh
+wget -N https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/install.sh | sudo bash install.sh
 
 
 WordPress Plugin
