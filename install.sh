@@ -31,10 +31,11 @@ fi
 
 	cd /usr/local/hestia/bin
 	curl -O https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/hestia/bin/v-install-wordpress
+	curl -O https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/hestia/bin/v-install-wp-ssl-enable
 	chmod 755 v-install-wordpress
 	chmod +x v-install-wordpress
 
 	# Success
-	echo "HestiaCP Wordpress Application Installer by maskoid.com is SUCCESSFULLY INSTALLED/UPDATED ported to Hestia By Spacestangs"
+	echo "HestiaCP Wordpress Application Installer by alex rezni is SUCCESSFULLY INSTALLED/UPDATED ported to Hestia By Spacestangs"
 
 
