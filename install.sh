@@ -34,6 +34,8 @@ fi
 	curl -O https://raw.githubusercontent.com/spacestangs/hestia-wordpress-install-CLI/main/hestia/bin/v-install-wp-ssl-enable
 	chmod 755 v-install-wordpress
 	chmod +x v-install-wordpress
+	chmod 755 v-install-wp-ssl-enable
+	chmod +x v-install-wp-ssl-enable
 
 	# Success
 	echo "HestiaCP Wordpress Application Installer by alex rezni is SUCCESSFULLY INSTALLED/UPDATED ported to Hestia By Spacestangs"
